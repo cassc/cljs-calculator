@@ -51,3 +51,7 @@ div.ans-display{
 a {
     text-decoration: none;
 }
+
+span.error{
+    color:red;
+}

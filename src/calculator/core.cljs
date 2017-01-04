@@ -17,11 +17,16 @@
   (reset! result-state nil)
   (reset! ans-state nil))
 
+(defonce error-state (atom false))
 (defn calculate! []
-  (let [form (apply str @input-state)
-        r (js/eval form)]
-    (reset! result-state r)
-    (reset! ans-state r)))
+  (try
+    (let [form (apply str @input-state)
+          r (js/eval form)]
+      (reset! input-state [r])
+      (reset! result-state r)
+      (reset! ans-state r))
+    (catch js/Error e
+      (reset! error-state true))))
 
 (def cal-keys
   {:ac      "AC"
@@ -38,6 +43,7 @@
 (defn key-funcs [k]
   (fn []
     (reset! result-state nil)
+    (reset! error-state false)
     
     (cond
       (number? k)
@@ -78,7 +84,9 @@
 
 (defn state-display []
   [:div.row.ans-display
-   [:span (str "ANS=" @ans-state)]])
+   [:span (if @error-state
+            [:span.error "Invalid expression"]
+            (str "ANS=" @ans-state))]])
 
 (defn my-app []
   (fn []

@@ -1,6 +1,6 @@
 (defproject fcc-calculator "0.1.0-SNAPSHOT"
   :description "A freecodecamp project: caculator"
-  :url ""
+  :url "https://github.com/cassc/cljs-calculator"
 
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.9.293"]

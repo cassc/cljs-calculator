@@ -1,4 +1,4 @@
-# wikipedia search
+# About
 
 A calculator written in ClojureScript.
 
